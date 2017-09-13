@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+function main {
+  tf fmt
+  tf validate
+}
+
+source sub "$0" "$@"

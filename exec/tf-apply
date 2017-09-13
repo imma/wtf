@@ -10,7 +10,6 @@ function main {
     return 1
   fi
 
-  terraform validate
   if terraform apply -auto-approve=true .plan "$@"; then
     rm -f .plan
   fi
