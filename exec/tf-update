@@ -5,7 +5,7 @@ function main {
   source "$shome/script/profile"
   source normalize
 
-  terraform get -update "$@"
+  tf init -backend=false -get=true -get-plugins=true -upgrade=true
 }
 
 source sub "$BASH_SOURCE" "$@"

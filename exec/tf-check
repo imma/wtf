@@ -5,7 +5,8 @@ function main {
   source "$shome/script/profile"
   source normalize
 
-  tf init -upgrade "$@"
+  tf update
+  tf validate -check-variables=false
 }
 
 source sub "$BASH_SOURCE" "$@"
