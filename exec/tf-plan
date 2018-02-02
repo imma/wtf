@@ -6,7 +6,7 @@ function main {
   source normalize
 
   terraform get
-  terraform plan -out .plan "$@"
+  terraform plan -out .plan "$@" | landscape
   if [[ "$(terraform show .plan)" == "This plan does nothing." ]]; then
     rm -f .plan
   fi
