@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 
 function main {
-  exec terraform "$@"
+  local cmd_tf="terraform-${1:-}"
+
+  if type -P "${cmd_tf}" >/dev/null; then
+    shift
+    exec "${cmd_tf}" "$@"
+  else
+    exec terraform "$@"
+  fi
 }
 
 source sub "$0" "$@"
