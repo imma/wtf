@@ -5,7 +5,9 @@ function main {
   source "$shome/script/profile"
   source normalize
 
-  tf output -json -no-color | jq -r 'to_entries[] | "fogg_\(.key)=\([.value.value] | flatten | map(select(type | . != "object")) | join(" ") | @sh)"'
+  local prefix="${1:+${1}_}"
+
+  tf output -json -no-color | jq --arg prefix "$prefix" -r 'to_entries[] | "\($prefix)\(.key)=\([.value.value] | flatten | map(select(type | . != "object")) | join(" ") | @sh)"'
 }
 
 source sub "$BASH_SOURCE" "$@"
