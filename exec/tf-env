@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+function main {
+  local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
+  source "$shome/script/profile"
+  source normalize
+
+  tf output -json -no-color | jq -r 'to_entries[] | "fogg_\(.key)=\([.value.value] | flatten | map(select(type | . != "object")) | join(" ") | @sh)"'
+}
+
+source sub "$BASH_SOURCE" "$@"
