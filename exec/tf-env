@@ -7,7 +7,7 @@ function main {
 
   local prefix="${1:+${1}_}"
 
-  tf output -json -no-color | jq --arg prefix "$prefix" -r 'to_entries[] | "\($prefix)\(.key)=\([.value.value] | flatten | map(select(type | . != "object")) | join(" ") | @sh)"'
+  tf output -json -no-color | jq --arg prefix "$prefix" -r 'to_entries[] | "\($prefix)\(.key)=\([.value.value] | flatten | map(select(type | . != "object")) | join(" "))"'
 }
 
 source sub "$BASH_SOURCE" "$@"
